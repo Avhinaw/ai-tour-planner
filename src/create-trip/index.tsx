@@ -228,7 +228,7 @@ function CreateTrip() {
                 <p className="pb-4 text-md">
                   Sign In to the App with Google authentication securely
                 </p>
-                <Button onClick={login}>
+                <Button onClick={() => login()}>
                   <FcGoogle />
                   Sign in to Google
                 </Button>
