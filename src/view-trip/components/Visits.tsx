@@ -14,18 +14,8 @@ interface DayDetails {
   places: Place[];
 }
 
-interface Trip {
-  tripData?: {
-    itinerary?: Record<string, DayDetails>;
-  };
-}
-
-interface VisitsProps {
-  trip: Trip;
-}
-
-function Visits({ trip }: VisitsProps) {
-  if (!trip || !trip.tripData?.itinerary) {
+function Visits({ trip }: { trip : any}) {
+  if (!trip?.tripData?.itinerary) {
     return <p>No Visits recommendations available.</p>;
   }
 
@@ -47,11 +37,10 @@ function Visits({ trip }: VisitsProps) {
               {dayKey.replace(/day(\d+)/, 'Day $1')}
             </h3>
             <h4 className="text-orange-600 font-semibold">
-              {dayDetails.best_time_to_visit}
+              {(dayDetails as DayDetails).best_time_to_visit}
             </h4>
-
             <div className="flex flex-wrap gap-5 my-2">
-              {dayDetails.places.map((place, placeIdx) => (
+              {(dayDetails as DayDetails).places.map((place, placeIdx) => (
                 <Link 
                   key={placeIdx} 
                   to={`https://www.google.com/maps/search/?api=1&query=${place.placeName},${place.geoCoordinates}`} 

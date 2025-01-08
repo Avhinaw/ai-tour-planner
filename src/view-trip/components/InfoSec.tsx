@@ -1,23 +1,5 @@
-interface TripDetails {
-  location: string;
-  duration: string;
-  budget: string;
-  travelers: string;
-}
 
-interface TripData {
-  trip_details: TripDetails;
-}
-
-interface Trip {
-  tripData: TripData;
-}
-
-interface InfoSecProps {
-  trip: Trip;
-}
-
-function InfoSec({ trip }: InfoSecProps) {
+function InfoSec({ trip }: any) {
   const { location, duration, budget, travelers } = trip.tripData.trip_details;
 
   return (
