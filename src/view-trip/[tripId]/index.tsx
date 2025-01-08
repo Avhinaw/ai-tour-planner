@@ -7,7 +7,6 @@ import InfoSec from "../components/InfoSec";
 import Hotels from "../components/Hotels";
 import Visits from "../components/Visits";
 
-
 interface TripDetails {
   trip_details: {
     location: string;
@@ -31,11 +30,16 @@ interface TripDetails {
         rating: string;
         ticketPricing: string;
         timeTravel: string;
-        geoCoordinates: string;
+        geoCoordinates: {
+          latitude: number;
+          longitude: number;
+        };
       }>;
     };
   };
 }
+
+
 
 function ViewTrip() {
   const { tripId } = useParams<{ tripId: string }>();
@@ -43,16 +47,16 @@ function ViewTrip() {
 
   useEffect(() => {
     if (tripId) {
-      getTripData();
+      getTripData(tripId);
     } else {
       console.warn("No trip ID provided");
     }
   }, [tripId]);
 
-  const getTripData = async () => {
+  const getTripData = async (id: string) => {
     try {
-      console.log("Fetching trip with ID:", tripId);
-      const docRef = doc(db, "AiTour", tripId);
+      console.log("Fetching trip with ID:", id);
+      const docRef = doc(db, "AiTour", id);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -61,29 +65,36 @@ function ViewTrip() {
         console.log("Trip Data:", tripData);
         toast({
           title: "Trip loaded successfully!",
-          description: "Trip data fetched from Firestore."
+          description: "Trip data fetched from Firestore.",
         });
       } else {
         console.warn("No such document!");
         setTrip(null);
         toast({
           title: "Trip not found",
-          description: "No data available for the provided trip ID.",        });
+          description: "No data available for the provided trip ID.",
+        });
       }
     } catch (error) {
       console.error("Error fetching trip data:", error);
       toast({
         title: "Error",
-        description: "Failed to fetch trip data. Please try again."
+        description: "Failed to fetch trip data. Please try again.",
       });
     }
   };
 
   return (
     <div className="lg:px-56 px-5 py-10">
-      {trip ? <InfoSec trip={trip} /> : <p>No trip data available.</p>}
-      <Hotels trip={trip} />
-      <Visits trip={trip} />
+      {trip ? (
+        <>
+          <InfoSec trip={trip} />
+          <Hotels trip={trip} />
+          <Visits trip={trip} />
+        </>
+      ) : (
+        <p>No trip data available.</p>
+      )}
     </div>
   );
 }
