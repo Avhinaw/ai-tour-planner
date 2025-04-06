@@ -41,9 +41,9 @@ function MyTrips() {
   };
 
   return (
-    <div className="px-56 py-10">
+    <div className="lg:px-56 py-10 px-5">
       <h2 className="text-3xl font-bold">My Trips</h2>
-      <div className="grid grid-cols-3 gap-4 py-8 px-2">
+      <div className="grid lg:grid-cols-3 lg:gap-4 gap-10 py-8 px-2">
         {userTrips.map((trip) => (
           <TripsItem key={trip.id} trip={trip} />
         ))}

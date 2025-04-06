@@ -16,7 +16,7 @@ function Hotels({ trip }: any) {
             target="_blank" 
             rel="noopener noreferrer"
           >
-            <div className="rounded-lg lg:w-[252px] w-[220px] hover:scale-105 transition-all ease-in-out cursor-pointer">
+            <div className="rounded-lg lg:w-[252px] w-[px] hover:scale-105 transition-all ease-in-out cursor-pointer">
               <img
                 className="h-[200px] w-full rounded-xl object-cover"
                 src={item.image || "/placeholder.jpg"}
