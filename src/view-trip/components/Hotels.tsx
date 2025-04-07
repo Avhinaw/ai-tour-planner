@@ -6,9 +6,9 @@ function Hotels({ trip }: any) {
   }
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <h2 className="text-xl font-bold">Hotel Recommendations</h2>
-      <div className="py-4 flex flex-wrap gap-5">
+      <div className="py-4 flex lg:flex-row flex-col gap-5">
         {trip.tripData.hotel_options.map((item: any, idx: number) => (
           <Link 
             key={idx}
@@ -16,7 +16,7 @@ function Hotels({ trip }: any) {
             target="_blank" 
             rel="noopener noreferrer"
           >
-            <div className="rounded-lg lg:w-[252px] w-[px] hover:scale-105 transition-all ease-in-out cursor-pointer">
+            <div className="rounded-lg lg:w-[252px] w-[380px] hover:scale-105 transition-all ease-in-out cursor-pointer">
               <img
                 className="h-[200px] w-full rounded-xl object-cover"
                 src={item.image || "/placeholder.jpg"}

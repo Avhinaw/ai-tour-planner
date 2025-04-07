@@ -28,7 +28,7 @@ function Visits({ trip }: { trip : any}) {
   );
 
   return (
-    <div className="my-5">
+    <div className="my-5 flex flex-col items-center">
       <h2 className="text-xl font-bold my-5">Places to Visit</h2>
       <div>
         {itineraryEntries.map(([dayKey, dayDetails], idx) => (
@@ -36,10 +36,10 @@ function Visits({ trip }: { trip : any}) {
             <h3 className="text-lg font-semibold my-1">
               {dayKey.replace(/day(\d+)/, 'Day $1')}
             </h3>
-            <h4 className="text-orange-600 font-semibold">
+            <h4 className="text-orange-600 font-semibold pb-4">
               {(dayDetails as DayDetails).best_time_to_visit}
             </h4>
-            <div className="flex flex-wrap gap-5 my-2">
+            <div className="flex lg:flex-row flex-col gap-5 my-2">
               {(dayDetails as DayDetails).places.map((place, placeIdx) => (
                 <Link 
                   key={placeIdx} 
@@ -47,9 +47,9 @@ function Visits({ trip }: { trip : any}) {
                   target='_blank' 
                   rel="noopener noreferrer"
                 >
-                  <div className="border w-[250px] rounded-lg p-4 hover:scale-105 transition-all ease-in-out">
+                  <div className="border lg:w-[250px] rounded-lg p-4 hover:scale-105 transition-all ease-in-out">
                     <img
-                      className="object-cover rounded-lg w-[200px]"
+                      className="object-cover rounded-lg lg:w-[200px]"
                       src={'/placeholder.jpg'}
                       alt={place.placeName}
                     />
