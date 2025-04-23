@@ -23,6 +23,15 @@ interface FormData {
   budget: string;
   travelWith: string;
 }
+type TokenInfo = {
+  access_token: string;
+  expires_in?: number;
+  scope?: string;
+  token_type?: string;
+  refresh_token?: string;
+  id_token?: string;
+};
+
 
 function CreateTrip() {
   const [formData, setFormData] = useState<FormData>({
@@ -113,7 +122,7 @@ function CreateTrip() {
     navigate(`/view-trip/${docId}`);
   };
 
-  const getUserProfile = (tokenInfo: any) => {
+  const getUserProfile = (tokenInfo: TokenInfo) => {
     axios
       .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${tokenInfo.access_token}`, {
         headers: {
